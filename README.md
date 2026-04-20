@@ -1,0 +1,3 @@
+## Commit 1 Reflection notes 
+
+The 'handle_connection' function uses a 'BufReader' to buffer the raw 'TcpStream' in memory, significantly improving performance by reducing direct system calls. It employs 'take_while(|line| !line.is_empty())' to recognize the empty line that marks the end of HTTP headers in a standard request. This stop condition is essential because, without it, the server would wait indefinitely for more data, causing a deadlock where the browser expects a response while the server remains stuck in a reading loop.
